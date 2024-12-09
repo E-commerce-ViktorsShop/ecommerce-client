@@ -1,11 +1,16 @@
 class HeaderComp extends HTMLElement {
   constructor() {
     super();
-    
   }
   connectedCallback() {
     console.log("Connected");
     this.innerHTML = `
+    <style>
+        header{
+            width: 100vw;
+            border-bottom: 1px solid black;
+        }
+    </style>
         <header>
             <div id="searchbar-wrapper">
                 <input type="search" placeholder="Sök..." aria-label="sök" id="search-input">

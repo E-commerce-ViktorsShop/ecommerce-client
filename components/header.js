@@ -10,8 +10,8 @@ class HeaderComp extends HTMLElement {
       *{
         box-sizing: border-box;
         }
-
-        header{
+ 
+        header{ 
             width: 100vw;
             border-bottom: 1px solid black;
             padding: 5px;

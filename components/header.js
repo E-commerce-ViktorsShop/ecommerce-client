@@ -19,6 +19,7 @@ class HeaderComp extends HTMLElement {
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #001524;
         }
 
         #searchbar-wrapper{
@@ -35,10 +36,9 @@ class HeaderComp extends HTMLElement {
             padding: 8px;
             font-size: clamp(10pt, 5vw, 14pt);
         }
-
     </style>
 
-    <header>
+    <header id="topbar">
       <div id="searchbar-wrapper">
         <input type="search" placeholder="Sök..." aria-label="sök" id="search-input">
       </div>

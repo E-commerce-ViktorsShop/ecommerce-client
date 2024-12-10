@@ -1,10 +1,11 @@
   class FooterComp extends HTMLElement {
     constructor() {
         super();
+        this.attachShadow({ mode: "open"})
     }
     connectedCallback() {
         console.log("Connected");
-        this.innerHTML = `
+        this.shadowRoot.innerHTML = `
         <style>
             :host {
             box-sizing: border-box;
@@ -16,7 +17,7 @@
                 align-items: center;
 
                 width: 100%;
-                background-color: #001524;
+                background-color: var(--primary-color);
                 height: 395px;
                 position: relative;
 
@@ -50,7 +51,7 @@
 
                 height: 61px;
                 width: 100%;
-                background-color: #E1D1B9; 
+                background-color: var(--background); 
                 text-align: center;
 
             }

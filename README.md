@@ -1,2 +1,2 @@
-**School project to Work with Scrum workflow through jira and github
+## School project Working with Scrum workflow through jira and github
 

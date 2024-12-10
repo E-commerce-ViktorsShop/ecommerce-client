@@ -4,7 +4,6 @@ class HeaderComp extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
   connectedCallback() {
-    console.log("Connected");
     this.shadowRoot.innerHTML = `
     <style>
          :host {

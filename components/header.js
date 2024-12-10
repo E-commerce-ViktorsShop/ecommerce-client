@@ -29,7 +29,6 @@ class HeaderComp extends HTMLElement {
             width: 50%;
             max-width: 500px;
             min-width: 200px;
-           
           }
 
           #search-input {

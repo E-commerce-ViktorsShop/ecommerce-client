@@ -1,0 +1,19 @@
+:root {
+  --font-primary: "Roboto", sans-serif;
+  --primary-color: #001524;
+  --secondary-color: #15616d;
+  --call-to-action: #e17004;
+  --background: #e1d1b9;
+  --heading-font-size: clamp(14pt, 10vw, 18pt);
+  --normal-font-size: clamp(12pt, 5vw, 14pt);
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body{
+    font-family: var(--font-primary);
+}

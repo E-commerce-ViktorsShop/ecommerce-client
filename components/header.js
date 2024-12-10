@@ -10,9 +10,7 @@ class HeaderComp extends HTMLElement {
          :host {
             display: block;
             width: 100%;
-            background-color: #001524;
             border-bottom: 1px solid black;
-            padding: 5px;
             box-sizing: border-box;
             height: 100px;
           }
@@ -21,23 +19,51 @@ class HeaderComp extends HTMLElement {
             display: flex;
             width: 100%;
             height: 100%;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
           }
         
           #searchbar-wrapper {
-            width: 50%;
-            max-width: 500px;
-            min-width: 200px;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            background-color: #001524;
           }
 
           #search-input {
-            width: 100%;
-            height: 45px;
+            width: 50%; 
+            max-width: 500px;
+            min-width: 200px;
+            height: 40px;
             border-radius: 15px;
             border: 1px solid black;
             padding: 8px;
             font-size: clamp(10pt, 5vw, 14pt);
+          }
+          
+          #navigation{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 50px;
+          background-color: #15616d;
+          
+          }
+          
+          #category-list{
+          list-style: none;
+          width: 70%;
+          display: flex;
+          flex-direction: row;
+          margin: 0;
+          justify-content: space-around;
+          }
+          .category-link{
+          color: white;
           }
     </style>
 
@@ -45,8 +71,16 @@ class HeaderComp extends HTMLElement {
       <div id="searchbar-wrapper">
         <input type="search" placeholder="Sök..." aria-label="sök" id="search-input">
       </div>
-      <nav>
       
+      <nav id="navigation">
+      <ul id="category-list">
+        <li><a href="#" class="category-link">Category</a></li>
+        <li><a href="#" class="category-link">Category</a></li>
+        <li><a href="#" class="category-link">Category</a></li>
+        <li><a href="#" class="category-link">Category</a></li>
+        <li><a href="#" class="category-link">Category</a></li>
+        <li><a href="#" class="category-link">Category</a></li>
+      </ul>
       </nav>
     </header>
     `;

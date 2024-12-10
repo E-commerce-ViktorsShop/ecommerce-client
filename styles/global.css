@@ -8,6 +8,10 @@
   --normal-font-size: clamp(12pt, 5vw, 14pt);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -19,3 +23,5 @@ body {
 body{
     font-family: var(--font-primary);
 }
+
+

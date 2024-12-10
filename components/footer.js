@@ -6,12 +6,16 @@
         console.log("Connected");
         this.innerHTML = `
         <style>
+            :host {
+            box-sizing: border-box;
+            }
+
             footer {
                 display: flex; 
                 flex-direction: column;
                 align-items: center;
 
-                width: 100vw;
+                width: 100%;
                 background-color: #001524;
                 height: 395px;
                 position: relative;
@@ -45,7 +49,7 @@
                 grid-template-columns: repeat(3, 1fr);
 
                 height: 61px;
-                width: 100vw;
+                width: 100%;
                 background-color: #E1D1B9; 
                 text-align: center;
 

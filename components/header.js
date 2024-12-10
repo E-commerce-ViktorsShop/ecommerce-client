@@ -29,7 +29,7 @@ class HeaderComp extends HTMLElement {
             height: 100%;
             justify-content: center;
             align-items: center;
-            background-color: #001524;
+            background-color: var(--primary-color);
           }
 
           #search-input {
@@ -50,8 +50,7 @@ class HeaderComp extends HTMLElement {
           align-items: center;
           width: 100%;
           height: 50px;
-          background-color: #15616d;
-          
+          background-color: var(--secondary-color);
           }
           
           #category-list{

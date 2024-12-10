@@ -8,6 +8,7 @@
         <style>
             :host {
             box-sizing: border-box;
+            
             }
             
             footer {
@@ -17,8 +18,10 @@
 
                 width: 100%;
                 background-color: var(--primary-color);
-                height: 395px;
-                position: relative;
+                height: 395px;     
+                position: absolute;
+                left: 0;
+                bottom: 0;          
 
             }
 

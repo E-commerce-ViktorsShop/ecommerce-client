@@ -1,1 +1,10 @@
 @import url(./global.css);
+
+#quantity-box {
+    width: 80px;
+}
+
+#add-to-cart-btn {
+    background-color: var(--call-to-action);
+    border: 1px black solid;
+}

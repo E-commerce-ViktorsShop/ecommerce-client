@@ -4,13 +4,12 @@
         this.attachShadow({ mode: "open"})
     }
     connectedCallback() {
-        console.log("Connected");
         this.shadowRoot.innerHTML = `
         <style>
             :host {
             box-sizing: border-box;
             }
-
+            
             footer {
                 display: flex; 
                 flex-direction: column;
@@ -121,7 +120,6 @@
     }
 
     disconnectedCallback() {
-        console.log("Custom element removed from page.");
     }
 }
 

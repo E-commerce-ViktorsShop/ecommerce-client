@@ -8,7 +8,3 @@
     background-color: var(--call-to-action);
     border: 1px black solid;
 }
-
-main {
-    min-height: 100vh;
-}

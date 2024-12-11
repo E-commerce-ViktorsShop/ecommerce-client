@@ -24,6 +24,12 @@ body {
 	font-family: var(--font-primary);
 }
 
+
+main {
+    min-height: 100vh;
+	padding-top: 10vh;
+}
+
 #promoted-products {
 	display: flex;
 	flex-wrap: wrap;

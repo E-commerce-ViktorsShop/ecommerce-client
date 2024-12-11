@@ -21,8 +21,8 @@
                 height: 395px;     
                 position: relative;
                 left: 0;
-                bottom: 0;          
-
+                bottom: 0;             
+                
             }
 
             #footer {
@@ -97,6 +97,13 @@
                 color: #FFFFFF;
 
             }
+            
+            a {
+                color: black;
+                text-decoration: none;
+               
+            }
+                     
 
         </style>
 
@@ -113,7 +120,7 @@
             <div id="contact">
                 <div id="contact-1">0705788520</div>
                 <div id="contact-2">Viktors Väg 123</div>
-                <div id="contact-3">viktorshop@gmail.com</div>
+                <div id="contact-3"><a href="mailto:viktor.linne@gmail.com">viktorshop@gmail.com</a></div>
             </div>
             <div id="rights-reserved">
                 <p>© 2024 ViktorShop. All Rights Reserved.</p>

@@ -103,6 +103,10 @@
                 text-decoration: none;
                
             }
+            
+            .list-links {
+                color: white;
+            }
                      
 
         </style>
@@ -110,11 +114,11 @@
         <footer>
             <div id="footer">
                 <ul>
-                    <li><a>Mössor</a></li>
-                    <li><a>Tröjor</a></li>
-                    <li><a>Byxor</a></li>
-                    <li><a>Strumpor</a></li>
-                    <li><a>Skor</a></li>
+                    <li><a class="list-links">Mössor</a></li>
+                    <li><a class="list-links">Tröjor</a></li>
+                    <li><a class="list-links">Byxor</a></li>
+                    <li><a class="list-links">Strumpor</a></li>
+                    <li><a class="list-links">Skor</a></li>
                 </ul>
             </div>
             <div id="contact">

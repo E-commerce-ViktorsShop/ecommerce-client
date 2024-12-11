@@ -19,7 +19,7 @@
                 width: 100%;
                 background-color: var(--primary-color);
                 height: 395px;     
-                position: absolute;
+                position: relative;
                 left: 0;
                 bottom: 0;          
 

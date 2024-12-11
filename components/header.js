@@ -11,6 +11,8 @@ class HeaderComp extends HTMLElement {
             width: 100%;
             border-bottom: 1px solid black;
             box-sizing: border-box;
+            position: sticky;
+            top: 0;
             height: 100px;
           }
 
@@ -21,6 +23,7 @@ class HeaderComp extends HTMLElement {
             flex-direction: column;
             justify-content: center;
           }
+        
         
           #searchbar-wrapper {
             display: flex;

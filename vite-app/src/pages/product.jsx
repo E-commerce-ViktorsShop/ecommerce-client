@@ -1,7 +1,11 @@
-import React from "react"; 
+import React, { useEffect, useState} from "react"; 
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function ProductPage() {
+    const[product, setProduct] = useState(""); 
+    const params = useParams();
+    const id = params.id;
     const styles = {
         quantityBox: {
             width: "80px",
@@ -11,6 +15,25 @@ export default function ProductPage() {
             border: "1px black solid",
         },
     };
+
+    useEffect(() => {
+        async function fetchProduct(id) {
+            try {
+                const response = await fetch(`https://ecommerce-api-sandy.vercel.app/products/${id}`);
+                if (!response.ok) {
+                    throw new Error("HTTP error code: " + response.status);
+                }
+                const data = await response.json();
+                console.log(data);
+                setProduct(data);
+            } catch(error) {
+                console.log(error)
+            }
+        };
+
+        fetchProduct(id);
+    
+    }, [id])
 
     return (
         <>
@@ -23,6 +46,7 @@ export default function ProductPage() {
                             {/* Main product image */}
                             <div className="d-flex justify-content-between">
                                 {/* Thumbnails fetched with API */}
+                                {product ? <img src={product.image || `https://cdn.webhallen.com/images/product/${product.webhallen_id}?trim&amp;w=700`} alt={`Produkt: ${product.description}`} /> : <p>Cannot find image</p>}
                                 <div>
                                     {/* Placeholder for small images */}
                                 </div>
@@ -30,15 +54,12 @@ export default function ProductPage() {
                         </div>
                         {/* Product Information Section */}
                         <div className="col">
-                            <h2 className="mb-3">Product</h2>
-                            <h3 className="mb-3">Price product</h3>
+                            <h2 className="mb-3">{product.name}</h2>
+                            <h3 className="mb-3">{product?.price?.$numberDecimal || 0} kr</h3>
                             <p className="mb-4">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                Asperiores qui ipsa amet optio necessitatibus aliquid sequi.
-                                Rerum, ullam ipsa quo aliquid nulla earum doloremque cum in aperiam
-                                eveniet tenetur ducimus.
+                                {product.description}
                             </p>
-                            <p className="mb-4">Article number: xxxxxxxx</p>
+                            <p className="mb-4">Article number: {product._id}</p>
                             {/* Quantity Input */}
                             <div className="mb-4" style={styles.quantityBox}>
                                 <label htmlFor="quantity" className="form-label">

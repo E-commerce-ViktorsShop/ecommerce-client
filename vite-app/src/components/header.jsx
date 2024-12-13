@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/header.css'; // CSS styles moved to an external file or styled-components
+import {useNavigate} from "react-router-dom";
 
 export default function HeaderComp() {
-
+    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
     const categories = [
         'Apple',
         'Datorer & Tillbehör',
@@ -14,22 +16,38 @@ export default function HeaderComp() {
         'Spel',
         'TV, Ljud & Bild'
     ]
+
+    function submitHandler(event) {
+        event.preventDefault()
+        if (searchTerm.length > 0) {
+            navigate(`/?searchTerm=${searchTerm}`);
+        }
+    }
+
+    function changeHandler(event) {
+        setSearchTerm(event.target.value);
+    }
+
     return (
         <header className="topbar">
             {/* Search Bar Section */}
-            <div className="searchbar-wrapper">
+            <form className="searchbar-wrapper" onSubmit={submitHandler}>
                 <input
                     type="search"
                     placeholder="Sök..."
                     aria-label="sök"
                     className="search-input"
+                    onChange={changeHandler}
                 />
-            </div>
+            </form>
 
             {/* Navigation Section */}
             <nav className="navigation">
                 <ul className="category-list">
-                    {categories.map((category, index) => (<li className="category-item" key={index}><a className="category-link" href={`/categories/${category}`}>{category}</a></li>))}
+                    {categories.map((category, index) => (
+                        <li className="category-item" key={index}><a className="category-link"
+                                                                     href={`/categories/${category}`}>{category}</a>
+                        </li>))}
                 </ul>
             </nav>
         </header>

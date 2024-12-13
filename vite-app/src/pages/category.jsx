@@ -1,23 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
-
-async function fetchProducts() {
-    try {
-        const response = await fetch('https://ecommerce-api-sandy.vercel.app/products/?limit=10')
-        if (!response.ok) {
-            console.error("Error fetching data")
-            return;
-        }
-
-        return await response.json();
-
-    } catch (error) {
-        console.error(error)
-        return;
-    }
-
-
-}
+import {fetchProducts} from "../utils/functions.js";
 
 export default function CategoryPage (){
     const [products, setProducts ] = useState([])

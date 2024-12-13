@@ -1,0 +1,17 @@
+.product {
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: solid 1px #000000;
+    border-radius: 10px;
+    background-color: #fff;
+
+
+}
+
+.image {
+    width: 50%;
+}
+

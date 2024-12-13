@@ -8,7 +8,7 @@ export default function ProductComp({ product}) {
             <li className="product">
                 <p>{product.name}</p>
                 <p>{product.description}</p>
-                <img className="image" src={product.image} alt="" />
+                <img className="image" src={product.image+"?trim&w=500"} alt="" />
             </li>
         </>
     )

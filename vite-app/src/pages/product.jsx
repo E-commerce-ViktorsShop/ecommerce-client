@@ -17,6 +17,7 @@ export default function ProductPage() {
             backgroundColor: "var(--call-to-action)",
             border: "1px black solid",
         },
+
     };
 
     useEffect(() => {
@@ -39,13 +40,8 @@ export default function ProductPage() {
     }, [id])
 
     useEffect(() => {
-        let imageURL = "";
-        if (product.webhallen_id) {
-            imageURL = `https://cdn.webhallen.com/images/product/${product.webhallen_id}?trim&amp;w=700`;
-        } else {
-            imageURL = product.image
-        }
-
+        const imageURL = product.image + "?trim&w=500";
+        console.log(imageURL);
         setImages([imageURL, imageURL, imageURL]);
 
     }, [product])
@@ -58,13 +54,12 @@ export default function ProductPage() {
                     <div className="row">
                         {/* Product Images Section */}
                         <div className="col">
-                            {/* Main product image */}
                             <div className="d-flex justify-content-between">
-                                {/* Placeholder for small images */
+                                {/* Image carousel */
                                     <Carousel useKeyboardArrows={true}>
                                         {images.map((URL, index) => (
                                             <div className="slide" key={index}>
-                                                <img alt="sample_file" src={URL} />
+                                                <img alt="sample_file" src={URL}/>
                                             </div>
                                         ))}
                                     </Carousel>}

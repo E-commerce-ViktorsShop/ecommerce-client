@@ -3,22 +3,13 @@ import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import '../styles/product.css'
 
 export default function ProductPage() {
     const [product, setProduct] = useState("");
     const [images, setImages] = useState([]);
     const params = useParams();
     const id = params.id;
-    const styles = {
-        quantityBox: {
-            width: "80px",
-        },
-        addToCartBtn: {
-            backgroundColor: "var(--call-to-action)",
-            border: "1px black solid",
-        },
-
-    };
 
     useEffect(() => {
         async function fetchProduct(id) {
@@ -75,7 +66,7 @@ export default function ProductPage() {
                         </p>
                         <p className="mb-4">Article number: {product._id}</p>
                         {/* Quantity Input */}
-                        <div className="mb-4" style={styles.quantityBox}>
+                        <div className="mb-4" id="quantity-box">
                             <label htmlFor="quantity" className="form-label">
                                 Quantity:
                             </label>
@@ -92,7 +83,6 @@ export default function ProductPage() {
                             className="btn btn-lg mb-3"
                             type="button"
                             id="add-to-cart-btn"
-                            style={styles.addToCartBtn}
                         >
                             Add to cart
                         </button>

@@ -8,8 +8,9 @@
 }
 
 .carousel .slider-wrapper .slide img {
-    width: 30vw;
-    margin: 0 auto; 
+    width: 70%;
+    margin: auto; 
+    padding: 1.5rem;
 }
 
 .carousel .thumbs img {

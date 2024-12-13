@@ -1,0 +1,18 @@
+.add-to-cart-btn {
+    background-color: "var(--call-to-action)";
+    border: "1px black solid"
+}
+
+#quantity-box {
+    width: "80px";
+}
+
+.carousel .slider-wrapper .slide img {
+    width: 20%;
+    margin: 0 auto; 
+}
+
+.carousel .thumbs img {
+    width: 60px;
+    height: auto;
+}

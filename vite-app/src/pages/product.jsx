@@ -1,9 +1,12 @@
-import React, { useEffect, useState} from "react"; 
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function ProductPage() {
-    const[product, setProduct] = useState(""); 
+    const [product, setProduct] = useState("");
+    const [images, setImages] = useState([]);
     const params = useParams();
     const id = params.id;
     const styles = {
@@ -26,14 +29,26 @@ export default function ProductPage() {
                 const data = await response.json();
                 console.log(data);
                 setProduct(data);
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         };
 
         fetchProduct(id);
-    
+
     }, [id])
+
+    useEffect(() => {
+        let imageURL = "";
+        if (product.webhallen_id) {
+            imageURL = `https://cdn.webhallen.com/images/product/${product.webhallen_id}?trim&amp;w=700`;
+        } else {
+            imageURL = product.image
+        }
+
+        setImages([imageURL, imageURL, imageURL]);
+
+    }, [product])
 
     return (
         <>
@@ -45,55 +60,58 @@ export default function ProductPage() {
                         <div className="col">
                             {/* Main product image */}
                             <div className="d-flex justify-content-between">
-                                {/* Thumbnails fetched with API */}
-                                {product ? <img src={product.image || `https://cdn.webhallen.com/images/product/${product.webhallen_id}?trim&amp;w=700`} alt={`Produkt: ${product.description}`} /> : <p>Cannot find image</p>}
-                                <div>
-                                    {/* Placeholder for small images */}
-                                </div>
+                                {/* Placeholder for small images */
+                                    <Carousel useKeyboardArrows={true}>
+                                        {images.map((URL, index) => (
+                                            <div className="slide" key={index}>
+                                                <img alt="sample_file" src={URL} />
+                                            </div>
+                                        ))}
+                                    </Carousel>}
                             </div>
-                        </div>
-                        {/* Product Information Section */}
-                        <div className="col">
-                            <h2 className="mb-3">{product.name}</h2>
-                            <h3 className="mb-3">{product?.price?.$numberDecimal || 0} kr</h3>
-                            <p className="mb-4">
-                                {product.description}
-                            </p>
-                            <p className="mb-4">Article number: {product._id}</p>
-                            {/* Quantity Input */}
-                            <div className="mb-4" style={styles.quantityBox}>
-                                <label htmlFor="quantity" className="form-label">
-                                    Quantity:
-                                </label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    id="quantity"
-                                    defaultValue="1"
-                                    min="1"
-                                />
-                            </div>
-                            {/* Add to Cart Button */}
-                            <button
-                                className="btn btn-lg mb-3"
-                                type="button"
-                                id="add-to-cart-btn"
-                                style={styles.addToCartBtn}
-                            >
-                                Add to cart
-                            </button>
-                            {/* More Info Section */}
-                            <h5>More info</h5>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eveniet
-                                earum perferendis, iste, commodi dolor dolorum, neque laudantium
-                                voluptas reiciendis ratione maiores facere et in sit laborum impedit
-                                autem amet?
-                            </p>
                         </div>
                     </div>
+                    {/* Product Information Section */}
+                    <div className="col">
+                        <h2 className="mb-3">{product.name}</h2>
+                        <h3 className="mb-3">{product?.price?.$numberDecimal || 0} kr</h3>
+                        <p className="mb-4">
+                            {product.description}
+                        </p>
+                        <p className="mb-4">Article number: {product._id}</p>
+                        {/* Quantity Input */}
+                        <div className="mb-4" style={styles.quantityBox}>
+                            <label htmlFor="quantity" className="form-label">
+                                Quantity:
+                            </label>
+                            <input
+                                type="number"
+                                className="form-control"
+                                id="quantity"
+                                defaultValue="1"
+                                min="1"
+                            />
+                        </div>
+                        {/* Add to Cart Button */}
+                        <button
+                            className="btn btn-lg mb-3"
+                            type="button"
+                            id="add-to-cart-btn"
+                            style={styles.addToCartBtn}
+                        >
+                            Add to cart
+                        </button>
+                        {/* More Info Section */}
+                        <h5>More info</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum eveniet
+                            earum perferendis, iste, commodi dolor dolorum, neque laudantium
+                            voluptas reiciendis ratione maiores facere et in sit laborum impedit
+                            autem amet?
+                        </p>
+                    </div>
                 </div>
-            </main>
+            </main >
         </>
     );
 }

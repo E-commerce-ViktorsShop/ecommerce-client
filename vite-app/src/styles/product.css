@@ -1,14 +1,14 @@
-.add-to-cart-btn {
-    background-color: "var(--call-to-action)";
-    border: "1px black solid"
+#add-to-cart-btn {
+    background-color: var(--call-to-action);
+    border: 1px black solid;
 }
 
 #quantity-box {
-    width: "80px";
+    width: 80px;
 }
 
 .carousel .slider-wrapper .slide img {
-    width: 20%;
+    width: 30vw;
     margin: 0 auto; 
 }
 

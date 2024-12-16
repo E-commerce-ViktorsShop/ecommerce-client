@@ -10,19 +10,6 @@ export function EmblaCarousel({images}) {
   const [emblaRef] = useEmblaCarousel();
 
   return (
-    <>
-    <style> {`
-    .embla {
-        overflow: hidden;
-        }
-        .embla__container {
-        display: flex;
-        }
-        .embla__slide {
-        flex: 0 0 100%;
-        min-width: 0;
-        }`}
-    </style>
     <div className="embla" ref={emblaRef}>
       <div className="embla__container">
         {images?.map(image => (
@@ -33,7 +20,6 @@ export function EmblaCarousel({images}) {
         ))}
       </div>
     </div>
-    </>
   );
 }
 

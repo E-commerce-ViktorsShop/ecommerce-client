@@ -8,6 +8,7 @@ import "../styles/product.css";
 export default function ProductPage() {
   const [product, setProduct] = useState("");
   const [images, setImages] = useState([]);
+  const [quantity, setQuantity] = useState(1);
   const params = useParams();
   const id = params.id;
 
@@ -36,6 +37,37 @@ export default function ProductPage() {
     console.log(imageURL);
     setImages([imageURL, imageURL, imageURL]);
   }, [product]);
+
+  const handleQuantityChange = (event) => {
+    const value = parseInt(event.target.value);
+    if (value > 0) {
+      setQuantity(value);
+    }
+  };
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+    };
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItemIndex = cart.findIndex((item) => item.id === cartItem.id);
+
+    if (existingItemIndex !== -1) {
+      // Uppdatera kvantitet om produkten redan finns
+      cart[existingItemIndex].quantity += cartItem.quantity;
+    } else {
+      // Lägg till produkten om den inte finns
+      cart.push(cartItem);
+    }
+
+    // Uppdatera local storage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Product added to cart!");
+  };
 
   return (
     <>
@@ -74,8 +106,9 @@ export default function ProductPage() {
                   type="number"
                   className="form-control"
                   id="quantity"
-                  defaultValue="1"
+                  value={quantity}
                   min="1"
+                  onChange={handleQuantityChange}
                 />
               </div>
               {/* Add to Cart Button */}
@@ -83,6 +116,7 @@ export default function ProductPage() {
                 className="btn btn-lg mb-3"
                 type="button"
                 id="add-to-cart-btn"
+                onClick={handleAddToCart}
               >
                 Add to cart
               </button>

@@ -40,7 +40,7 @@ export default function ProductPage() {
   return (
     <>
       {/* Main Content */}
-      <main className="container mt-5 mb-5">
+      <main className="container mb-5">
         <div className="container-lg">
           <div className="row">
             {/* Product Images Section */}

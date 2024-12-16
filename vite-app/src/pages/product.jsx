@@ -4,10 +4,41 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/product.css";
+import useEmblaCarousel from "embla-carousel-react";
+
+export function EmblaCarousel({images}) {
+  const [emblaRef] = useEmblaCarousel();
+
+  return (
+    <>
+    <style> {`
+    .embla {
+        overflow: hidden;
+        }
+        .embla__container {
+        display: flex;
+        }
+        .embla__slide {
+        flex: 0 0 100%;
+        min-width: 0;
+        }`}
+    </style>
+    <div className="embla" ref={emblaRef}>
+      <div className="embla__container">
+        {images?.map(image => (
+            <div className="embla__slide">
+                <img src={`https://cdn.webhallen.com${image.large}&w=500
+                    `} alt="product image" />
+            </div>
+        ))}
+      </div>
+    </div>
+    </>
+  );
+}
 
 export default function ProductPage() {
   const [product, setProduct] = useState("");
-  const [images, setImages] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const params = useParams();
   const id = params.id;
@@ -31,12 +62,6 @@ export default function ProductPage() {
 
     fetchProduct(id);
   }, [id]);
-
-  useEffect(() => {
-    const imageURL = product.image + "?trim&w=500";
-    console.log(imageURL);
-    setImages([imageURL, imageURL, imageURL]);
-  }, [product]);
 
   const handleQuantityChange = (event) => {
     const value = parseInt(event.target.value);
@@ -78,16 +103,7 @@ export default function ProductPage() {
             {/* Product Images Section */}
             <div className="col-6">
               <div className="d-flex justify-content-between">
-                {
-                  /* Image carousel */
-                  <Carousel useKeyboardArrows={true}>
-                    {images.map((URL, index) => (
-                      <div className="slide" key={index}>
-                        <img alt="sample_file" src={URL} />
-                      </div>
-                    ))}
-                  </Carousel>
-                }
+                <EmblaCarousel images={product?.images}/>
               </div>
             </div>
 
@@ -95,7 +111,7 @@ export default function ProductPage() {
             <div className="col-6">
               <h2 className="mb-3">{product.name}</h2>
               <h3 className="mb-3">{product?.price?.$numberDecimal || 0} kr</h3>
-              <p className="mb-4">{product.description}</p>
+              <p className="mb-4">{product.subTitle}</p>
               <p className="mb-4">Article number: {product._id}</p>
               {/* Quantity Input */}
               <div className="mb-4" id="quantity-box">

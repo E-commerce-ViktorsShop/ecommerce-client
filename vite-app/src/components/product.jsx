@@ -7,7 +7,7 @@ export default function ProductComp({ product }) {
 		<>
 			<Link to={`/product/${product._id}`} style={{ textDecoration: 'none' }}>
 				<li className='product'>
-					<p>{product.name}</p>
+					<p className='fw-bold'>{product.name}</p>
 					<p>{product.description}</p>
 					<img className='image' src={product.image + '?trim&w=500'} alt='' />
 				</li>

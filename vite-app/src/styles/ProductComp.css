@@ -1,17 +1,16 @@
 .product {
-    display : flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 
-    border: solid 1px #000000;
-    border-radius: 10px;
-    background-color: #fff;
-
-
+	border: solid 1px #000000;
+	border-radius: 10px;
+	background-color: #fff;
+	height: 100%;
+	padding: 1rem;
 }
 
 .image {
-    width: 50%;
+	width: 50%;
 }
-

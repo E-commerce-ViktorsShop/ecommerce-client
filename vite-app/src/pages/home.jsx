@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { fetchProducts } from '../utils/functions';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { fetchProducts } from '../utils/functions.js';
+import ProductComp from '../components/product.jsx';
 
 export default function HomePage() {
-	const [searchValue, setSearchValue] = useState('spider-man');
-	const [results, setResults] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [products, setProducts] = useState([]);
 
-	const apiKey = '';
-
-	// Fetch results on initial render or when searchValue changes
 	useEffect(() => {
 		async function fetchData() {
 			const data = await fetchProducts();
@@ -23,33 +20,18 @@ export default function HomePage() {
 
 	return (
 		<>
-			<div className='home-page'>
-				<h1>Welcome to Movie Search</h1>
-				<input
-					type='text'
-					value={searchValue}
-					onChange={handleSearchChange}
-					placeholder='Search for a movie...'
-				/>
-				{loading && <p>Loading...</p>}
-				{error && <p>Error: {error}</p>}
-				<div id='promoted-products'>
-					{results.length > 0 ? (
-						results.map((movie) => (
-							<div key={movie.imdbID} className='productBlock'>
-								<img
-									className='productImg'
-									src={movie.Poster}
-									alt={movie.Title}
-								/>
-								<span className='productText'>{`${movie.Title} (${movie.Year})`}</span>
-							</div>
-						))
-					) : (
-						<p>No results found</p>
-					)}
-				</div>
-			</div>
+			<main>
+				<h1 className='text-center mb-5'>Välkommen!</h1>
+				<h2 className='text-center mb-5'>Kolla in dessa produkter</h2>
+				<ul
+					id='product-list'
+					className='row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3'
+				>
+					{products.map((product) => (
+						<ProductComp key={product._id} product={product} />
+					))}
+				</ul>
+			</main>
 		</>
 	);
 }

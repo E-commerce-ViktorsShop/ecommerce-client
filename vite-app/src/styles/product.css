@@ -26,3 +26,28 @@ main {
   background-color: rgb(255, 255, 255);
   margin-top: 6rem;
 }
+
+.embla {
+    overflow: hidden;
+    max-height: 500px;
+    }
+
+.embla__container {
+    display: flex;
+    max-height: 100%;
+    justify-content: center;
+    }
+
+.embla__slide {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 100%;
+    min-width: 0;
+    max-height: 100%;
+    }
+
+.custom-size {
+    width: auto;
+    height: 80%;
+    /* object-fit: cover; Behåll proportioner och beskära om nödvändigt */
+    }

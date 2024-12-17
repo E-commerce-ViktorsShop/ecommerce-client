@@ -43,7 +43,6 @@ export function EmblaCarousel({images}) {
                                 onLoad={handleImageLoad}
                                 onError={(e) => (e.target.src = "/path/to/fallback-image.jpg")}
                                 style={{display: loading ? "none" : "block"}} // Hide image until it's loaded
-                                loading="lazy" // Lazy loading
                             />
                         </div>
                     ))}
@@ -148,10 +147,6 @@ export default function ProductPage() {
         // Use the context function to add the product to the cart
         addToCart(cartItem);
     };
-
-    if (loading) {
-        return <LoadingSpinner/>;
-    }
 
     return (
         <>

@@ -44,6 +44,54 @@ main {
 }
 
 .embla__slide {
+  display: flex;
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  justify-content: center;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+/* Style product data table */
+.product-table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  padding: 0.75rem;
+}
+
+.category-header {
+  text-align: left;
+  font-size: 1.1rem;
+  padding-top: 15px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.attribute-row td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.attribute-name {
+  width: 50%;
+  font-weight: bold;
+  color: #333;
+}
+
+.attribute-value {
+  color: #555;
+}
+  
+
+/* Style accordion */
+th.category-header {
+  background-color: #fff;
+  border-bottom: none;
+  padding: 0.5rem 0;
+}
 	display: flex;
 	transform: translate3d(0, 0, 0);
 	flex: 0 0 var(--slide-size);

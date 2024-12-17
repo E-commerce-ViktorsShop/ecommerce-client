@@ -10,11 +10,10 @@ import {CartProvider} from "./providers/CartProvider.jsx";
 // Register Service Worker for image caching in built application
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/serviceWorker.js').then(() => {
-            console.log('Service Worker registered successfully.');
-        }).catch((err) => {
-            console.error('Service Worker registration failed:', err);
-        });
+        navigator.serviceWorker.register('/serviceWorker.js')
+            .catch((err) => {
+                console.error('Service Worker registration failed:', err);
+            });
     });
 }
 

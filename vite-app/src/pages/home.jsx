@@ -3,13 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {fetchProducts, fetchProductsBySearch} from '../utils/functions.js';
 import ProductComp from '../components/productCard.jsx';
 import {useLocation} from 'react-router';
-// import Banner from '../../public/banner.jpg';
 
 export default function HomePage() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const location = useLocation();
-
 
     async function fetchData(query = '', page = 1, limit = 20) {
         try {
@@ -19,9 +17,16 @@ export default function HomePage() {
             const cacheKey = `${query}-${page}-${limit}`;
 
             const cachedData = localStorage.getItem(cacheKey);
+
             if (cachedData) {
-                data = JSON.parse(cachedData);
+                try {
+                    data = JSON.parse(cachedData);
+                } catch (error) {
+                    console.error('Error parsing cached data:', error);
+                    data = []; // Fallback if parsing fails
+                }
             } else {
+                // If no cache, fetch the data
                 if (query) {
                     // Fetch products by search query
                     data = await fetchProductsBySearch(query, page, limit);
@@ -68,7 +73,7 @@ export default function HomePage() {
                         ? filteredProducts.map((product) => (
                             <ProductComp key={product._id} product={product}/>
                         ))
-                        : //Empty
+                        : // Empty
                         null}
                 </ul>
             </main>

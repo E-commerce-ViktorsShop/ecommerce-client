@@ -6,6 +6,7 @@
   --background: #e1d1b9;
   --heading-font-size: clamp(14pt, 10vw, 18pt);
   --normal-font-size: clamp(12pt, 5vw, 14pt);
+    --small-font-size: clamp(10pt, 5vw, 12pt);
 }
 
 * {

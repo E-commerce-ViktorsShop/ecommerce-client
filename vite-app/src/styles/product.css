@@ -1,0 +1,28 @@
+#add-to-cart-btn {
+  background-color: var(--call-to-action);
+  border: 1px black solid;
+}
+
+#quantity-box {
+  width: 80px;
+}
+
+.carousel .slider-wrapper .slide img {
+  width: 70%;
+  margin: auto;
+  padding: 1.5rem;
+}
+
+.carousel .thumbs img {
+  width: 60px;
+  height: auto;
+}
+
+body {
+  background-color: #f6f6f6;
+}
+
+main {
+  background-color: rgb(255, 255, 255);
+  margin-top: 6rem;
+}

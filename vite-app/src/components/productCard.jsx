@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/ProductComp.css';
 import {Link} from 'react-router';
+import LoadingSpinner from "./loaders/spinner.jsx";
 
 export default function ProductComp({product}) {
+    const [loading, setLoading] = useState(true);
     return (
         <>
             <Link to={`/product/${product._id}`} state={{product}} style={{textDecoration: 'none'}}>
@@ -11,11 +13,37 @@ export default function ProductComp({product}) {
                         className='d-flex flex-column justify-content-between align-items-center p-2'
                         style={{height: '100%'}}
                     >
-                        <div>
-                            <p className='fw-bold'>{product.name}</p>
-                            <p>{product.subTitle}</p>
+                        <p className="fw-bold" style={{
+                            height: '50px',
+                            display: '-webkit-box',
+                            WebkitBoxOrient: 'vertical',
+                            WebkitLineClamp: 2,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
+                        }}>
+                            {product.name}
+                        </p>
+                        <div className="d-flex align-items-center justify-content-center" style={{height: '64px'}}>
+                            <p className="text-truncate" style={{
+                                whiteSpace: "normal",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "-webkit-box",
+                                WebkitBoxOrient: "vertical",
+                                WebkitLineClamp: "2"
+                            }}>
+                                {product.subTitle}
+                            </p>
                         </div>
-                        <img className='image pb-2 w-50' src={product.thumbNail} alt=''/>
+                        <div className={"image-container w-100 overflow-hidden"} style={{height: "160px"}}>
+                            {
+                                loading && <LoadingSpinner/>
+                            }
+                            <img className='image pb-2 w-100 h-100 object-fit-contain'
+                                 style={{display: loading ? 'none' : 'block'}}
+                                 onLoad={() => setLoading(false)} src={product.thumbNail}
+                                 alt={`image for ${product.name}`}/>
+                        </div>
                     </div>
 
                     <div
@@ -29,5 +57,6 @@ export default function ProductComp({product}) {
                 </li>
             </Link>
         </>
-    );
+    )
+        ;
 }

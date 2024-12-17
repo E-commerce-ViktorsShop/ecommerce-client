@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { fetchProducts, fetchProductsBySearch } from '../utils/functions.js';
 import ProductComp from '../components/productCard.jsx';
 import { useLocation } from 'react-router';
-import Banner from '../assets/banner.jpg';
+// import Banner from '../../public/banner.jpg';
 
 export default function HomePage() {
 	const [filteredProducts, setFilteredProducts] = useState([]);
@@ -46,7 +46,7 @@ export default function HomePage() {
 
 	return (
 		<>
-			<img src={Banner} className='mb-2 mt-5 w-100' />
+			<img src={"/banners/banner.jpg"} className='mb-2 mt-5 w-100' />
 			<main className='mt-0 mb-5' style={{ background: '#f6f6f6' }}>
 				<h2 className='text-center mt-5 mb-5'>
 					{searchTerm

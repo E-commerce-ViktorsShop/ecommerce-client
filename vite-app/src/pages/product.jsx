@@ -5,6 +5,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/product.css";
 import useEmblaCarousel from "embla-carousel-react";
 import Accordion from "react-bootstrap/Accordion";
+import {useCart} from "../providers/CartProvider.jsx";
+import {useLocation} from "react-router-dom";
 
 
 export function EmblaCarousel({images}) {
@@ -84,12 +86,20 @@ const ProductTable = ({productData}) => {
 };
 
 export default function ProductPage() {
-    const [product, setProduct] = useState("");
+    const location = useLocation()
+    const [product, setProduct] = useState(location.state.product || null);
     const [quantity, setQuantity] = useState(1);
     const params = useParams();
     const id = params.id;
+    const {addToCart} = useCart() //custom hook to handle cart
 
     useEffect(() => {
+        if (product) {
+            console.log(product)
+            return;
+        }
+
+
         async function fetchProduct(id) {
             try {
                 const response = await fetch(
@@ -118,26 +128,15 @@ export default function ProductPage() {
 
     const handleAddToCart = () => {
         const cartItem = {
-            id: product._id,
+            _id: product._id,
             name: product.name,
             price: product.price,
-            quantity: quantity,
+            quantity: quantity
         };
 
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existingItemIndex = cart.findIndex((item) => item.id === cartItem.id);
 
-        if (existingItemIndex !== -1) {
-            // Uppdatera kvantitet om produkten redan finns
-            cart[existingItemIndex].quantity += cartItem.quantity;
-        } else {
-            // Lägg till produkten om den inte finns
-            cart.push(cartItem);
-        }
-
-        // Uppdatera local storage
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert("Product added to cart!");
+        // Use the context function to add the product to the cart
+        addToCart(cartItem);
     };
 
     return (
@@ -193,5 +192,6 @@ export default function ProductPage() {
             </main>
         </>
     );
-};
+}
+;
 

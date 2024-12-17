@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useNavigate} from "react-router-dom";
 import {categories} from "../utils/static.js";
-import logo from "../assets/Viktorsshop-comic.png";
 import {Link} from "react-router-dom"; // make sure to use "react-router-dom" instead of "react-router"
 import {useCart} from "../providers/CartProvider.jsx";
 
 export default function HeaderComp() {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-    const {cart} = useCart();
+    const {cartQuantity} = useCart();
+    const cartNum = cartQuantity();
 
     function submitHandler(event) {
         event.preventDefault();
@@ -29,7 +29,7 @@ export default function HeaderComp() {
                 {/* Logo Section */}
                 <div className="logo-container " style={{width: "33%"}}>
                     <Link to="/">
-                        <img src={logo} alt="Website Logo" width="250"/>
+                        <img src={"/logos/Viktorsshop-comic.png"} alt="Website Logo" width="250"/>
                     </Link>
                 </div>
 
@@ -55,7 +55,7 @@ export default function HeaderComp() {
                         <path
                             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                     </svg>
-                    {cart?.length > 0 ?
+                    {cartNum > 0 ?
                         <span className={"rounded-5 bg-secondary d-flex justify-content-center align-items-center p-2"}
                               style={{
                                   width: "20px",
@@ -67,7 +67,7 @@ export default function HeaderComp() {
                                   top: "50px",
                                   cursor: "pointer",
                               }}
-                              aria-label={`cart: ${cart.length}`}>{cart.length}
+                              aria-label={`cart: ${cartNum}`}>{cartNum}
                     </span> : null}
                 </div>
             </div>

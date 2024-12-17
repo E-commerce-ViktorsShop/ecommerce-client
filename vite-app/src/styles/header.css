@@ -1,6 +1,6 @@
 .topbar {
     display: block;
-    width: 100%;
+    width: 100vw;
     border-bottom: 1px solid black;
     box-sizing: border-box;
     position: sticky;
@@ -9,24 +9,42 @@
     z-index: 9999;
 }
 
-.searchbar-wrapper {
+
+.header-container {
     display: flex;
-    width: 100%;
     height: 100%;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 15px;
     align-items: center;
     background-color: var(--primary-color);
 }
 
+.logo-container {
+    width: 33%
+}
+
+.searchbar-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 33%;
+}
+
 .search-input {
-    width: 50%;
-    max-width: 500px;
+    width: 100%;
     min-width: 200px;
     height: 40px;
     border-radius: 15px;
     border: 1px solid black;
     padding: 8px;
     font-size: clamp(10pt, 5vw, 14pt);
+}
+
+.cart-container {
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
 }
 
 .navigation {

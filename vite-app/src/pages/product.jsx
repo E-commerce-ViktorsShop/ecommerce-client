@@ -143,8 +143,8 @@ export default function ProductPage() {
     <>
       {/* Main Content */}
       <main className="container mb-5">
-        <div className="container-lg">
-          <div className="row">
+        <div className="container-lg mb-5">
+          <div className="row align-items-center">
             {/* Product Images Section */}
             <div className="col-6">
               <div className="d-flex justify-content-between">
@@ -182,11 +182,11 @@ export default function ProductPage() {
                 Add to cart
               </button>
               {/* More Info Section */}
-              <div style={{ padding: "20px" }}>
-                <h5>Produktinformation</h5>
+            </div>
+              <div className="mt-5 mb-5">
+                <h4>Produktinformation</h4>
                 <ProductTable productData={product?.data} />
               </div>
-            </div>
           </div>
         </div>
       </main>

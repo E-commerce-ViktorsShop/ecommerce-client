@@ -4,11 +4,12 @@ import {useNavigate} from "react-router-dom";
 import {categories} from "../utils/static.js";
 import logo from "../assets/Viktorsshop-comic.png";
 import {Link} from "react-router-dom"; // make sure to use "react-router-dom" instead of "react-router"
+import {useCart} from "../providers/CartProvider.jsx";
 
 export default function HeaderComp() {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const {cart} = useCart();
 
     function submitHandler(event) {
         event.preventDefault();
@@ -65,7 +66,8 @@ export default function HeaderComp() {
                                   right: "60px",
                                   top: "50px",
                                   cursor: "pointer",
-                              }}>{cart.length}
+                              }}
+                              aria-label={`cart: ${cart.length}`}>{cart.length}
                     </span> : null}
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -6,19 +6,40 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/product.css";
 import useEmblaCarousel from "embla-carousel-react";
 
-export function EmblaCarousel({images}) {
-  const [emblaRef] = useEmblaCarousel();
+export function EmblaCarousel({ images }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel();
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   return (
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">
-        {images?.map(image => (
+    <div className="embla">
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">
+          {images?.map((image) => (
             <div className="embla__slide">
-                <img src={`https://cdn.webhallen.com${image.large}&w=500
-                    `} alt="product image" />
+              <img
+                src={`https://cdn.webhallen.com${image.large}&w=500
+              `}
+                alt="product image"
+                className="img-fluid"
+                onError={(e) => (e.target.src = "/path/to/fallback-image.jpg")}
+              />
             </div>
-        ))}
+          ))}
+        </div>
       </div>
+        <button className="embla__prev" onClick={scrollPrev}>
+          Prev
+        </button>
+        <button className="embla__next" onClick={scrollNext}>
+          Next
+        </button>
     </div>
   );
 }
@@ -89,7 +110,7 @@ export default function ProductPage() {
             {/* Product Images Section */}
             <div className="col-6">
               <div className="d-flex justify-content-between">
-                <EmblaCarousel images={product?.images}/>
+                <EmblaCarousel images={product?.images} />
               </div>
             </div>
 

@@ -1,13 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/product.css";
+import useEmblaCarousel from "embla-carousel-react";
+
+export function EmblaCarousel({ images }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel();
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  return (
+    <div className="embla">
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">
+          {images?.map((image) => (
+            <div className="embla__slide">
+              <img
+                src={`https://cdn.webhallen.com${image.large}&w=500
+              `}
+                alt="product image"
+                className="img-fluid"
+                onError={(e) => (e.target.src = "/path/to/fallback-image.jpg")}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <button className="embla__prev" onClick={scrollPrev}>
+        Prev
+      </button>
+      <button className="embla__next" onClick={scrollNext}>
+        Next
+      </button>
+    </div>
+  );
+}
+
+const ProductTable = ({ productData }) => {
+  if (!productData || productData.length === 0) {
+    return <p>Ingen produktinformation tillgänglig.</p>;
+  }
+
+  return (
+    <table className="product-table">
+      <tbody>
+        {productData.map((section, index) => (
+          <React.Fragment key={index}>
+            {/* Kategori-rubrik */}
+            <tr>
+              <th colSpan="2" className="category-header">
+                {section.category}
+              </th>
+            </tr>
+            {/* Attribut */}
+            {section.attributes.map((attribute, attrIndex) => (
+              <tr key={attrIndex} className="attribute-row">
+                <td className="attribute-name">{attribute.name}</td>
+                <td className="attribute-value">{attribute.value}</td>
+              </tr>
+            ))}
+          </React.Fragment>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
 export default function ProductPage() {
   const [product, setProduct] = useState("");
-  const [images, setImages] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const params = useParams();
   const id = params.id;
@@ -31,12 +98,6 @@ export default function ProductPage() {
 
     fetchProduct(id);
   }, [id]);
-
-  useEffect(() => {
-    const imageURL = product.image + "?trim&w=500";
-    console.log(imageURL);
-    setImages([imageURL, imageURL, imageURL]);
-  }, [product]);
 
   const handleQuantityChange = (event) => {
     const value = parseInt(event.target.value);
@@ -78,16 +139,7 @@ export default function ProductPage() {
             {/* Product Images Section */}
             <div className="col-6">
               <div className="d-flex justify-content-between">
-                {
-                  /* Image carousel */
-                  <Carousel useKeyboardArrows={true}>
-                    {images.map((URL, index) => (
-                      <div className="slide" key={index}>
-                        <img alt="sample_file" src={URL} />
-                      </div>
-                    ))}
-                  </Carousel>
-                }
+                <EmblaCarousel images={product?.images} />
               </div>
             </div>
 
@@ -95,7 +147,7 @@ export default function ProductPage() {
             <div className="col-6">
               <h2 className="mb-3">{product.name}</h2>
               <h3 className="mb-3">{product?.price?.$numberDecimal || 0} kr</h3>
-              <p className="mb-4">{product.description}</p>
+              <p className="mb-4">{product.subTitle}</p>
               <p className="mb-4">Article number: {product._id}</p>
               {/* Quantity Input */}
               <div className="mb-4" id="quantity-box">
@@ -121,13 +173,10 @@ export default function ProductPage() {
                 Add to cart
               </button>
               {/* More Info Section */}
-              <h5>More info</h5>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
-                eveniet earum perferendis, iste, commodi dolor dolorum, neque
-                laudantium voluptas reiciendis ratione maiores facere et in sit
-                laborum impedit autem amet?
-              </p>
+              <div style={{ padding: "20px" }}>
+                <h5>Produktinformation</h5>
+                <ProductTable productData={product.data} />
+              </div>
             </div>
           </div>
         </div>

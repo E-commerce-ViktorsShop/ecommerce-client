@@ -1,16 +1,5 @@
 :root {
-  --font-primary: "Roboto", sans-serif;
-  --primary-color: #001524;
-  --secondary-color: #15616d;
-  --call-to-action: #e17004;
-  --background: #e1d1b9;
-  --heading-font-size: clamp(14pt, 10vw, 18pt);
-  --normal-font-size: clamp(12pt, 5vw, 14pt);
-    --small-font-size: clamp(10pt, 5vw, 12pt);
-}
 
-* {
-  box-sizing: border-box;
 	--font-primary: 'Roboto', sans-serif;
 	--primary-color: #001524;
 	--secondary-color: #15616d;
@@ -26,58 +15,6 @@
 
 html,
 body {
-  height: 100%;
-  overflow-x: hidden;
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  font-family: var(--font-primary);
-}
-
-main {
-  min-height: 100vh;
-  padding-top: 10vh;
-}
-
-#promoted-products {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 10vh;
-}
-
-.productBlock {
-  color: var(--background);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  width: 250px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.productBlock:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
-.productImg {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-}
-
-.productText {
-  color: var(--primary-color);
-  text-align: right;
-  flex-grow: 1;
-  font-size: 1rem;
-  margin: 5px;
 	height: 100%;
 	overflow-x: hidden;
 	padding: 0;
@@ -90,6 +27,47 @@ body {
 
 main {
 	min-height: 100vh;
-
 }
 
+#promoted-products {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+	margin-top: 10vh;
+}
+
+.productBlock {
+	color: var(--background);
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	width: 250px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	text-align: center;
+	transition: transform 0.3s ease;
+}
+
+.productBlock:hover {
+	transform: scale(1.05);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+.productImg {
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+}
+
+.productText {
+	color: var(--primary-color);
+	text-align: right;
+	flex-grow: 1;
+	font-size: 1rem;
+	margin: 5px;
+	height: 100%;
+	overflow-x: hidden;
+	padding: 0;
+	margin: 0;
+}

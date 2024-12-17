@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ProductComp.css'; // External CSS file for styles
+import '../styles/ProductComp.css';
 import { Link } from 'react-router';
 
 export default function ProductComp({ product }) {
@@ -15,7 +15,7 @@ export default function ProductComp({ product }) {
 							<p className='fw-bold'>{product.name}</p>
 							<p>{product.subTitle}</p>
 						</div>
-						<img className='image pb-2' src={product.thumbNail} alt='' />
+						<img className='image pb-2 w-50' src={product.thumbNail} alt='' />
 					</div>
 
 					<div

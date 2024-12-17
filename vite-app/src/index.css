@@ -10,6 +10,17 @@
 
 * {
   box-sizing: border-box;
+	--font-primary: 'Roboto', sans-serif;
+	--primary-color: #001524;
+	--secondary-color: #15616d;
+	--call-to-action: #e17004;
+	--background: #e1d1b9;
+	--heading-font-size: clamp(14pt, 10vw, 18pt);
+	--normal-font-size: clamp(12pt, 5vw, 14pt);
+}
+
+* {
+	box-sizing: border-box;
 }
 
 html,
@@ -66,5 +77,18 @@ main {
   flex-grow: 1;
   font-size: 1rem;
   margin: 5px;
+	height: 100%;
+	overflow-x: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: var(--font-primary);
+}
+
+main {
+	min-height: 100vh;
+
 }
 

@@ -7,9 +7,16 @@ export default function ProductComp({ product }) {
 		<>
 			<Link to={`/product/${product._id}`} style={{ textDecoration: 'none' }}>
 				<li className='product'>
-					<p className='fw-bold'>{product.name}</p>
-					<p>{product.description}</p>
-					<img className='image' src={product.image + '?trim&w=500'} alt='' />
+					<div>
+						<p className='fw-bold'>{product.name}</p>
+						<p>{product.subTitle}</p>
+					</div>
+					<img
+						className='image'
+						src={product.thumbNail + '?trim&w=500'}
+						alt=''
+					/>
+					<p className='fw-bold'>{product.price.$numberDecimal} kr</p>
 				</li>
 			</Link>
 		</>

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { fetchProducts, fetchProductsBySearch } from '../utils/functions.js';
 import ProductComp from '../components/product.jsx';
+
 import { useLocation } from 'react-router';
+
 
 export default function HomePage() {
 	const [filteredProducts, setFilteredProducts] = useState([]);
@@ -39,8 +41,10 @@ export default function HomePage() {
 
 	return (
 		<>
-			<main>
-				<h1 className='text-center mb-5'>Välkommen!</h1>
+			{/* <img className='w-100' src={banner} alt='Christmas banner' /> */}
+
+			<main className='container-lg' style={{ background: '#f6f6f6' }}>
+				<h1 className='text-center mt-5 mb-5'>Välkommen!</h1>
 				<h2 className='text-center mb-5'>Kolla in dessa produkter</h2>
 
 				{/* Loading state */}

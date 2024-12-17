@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/product.css";
 import useEmblaCarousel from "embla-carousel-react";
+import Accordion from "react-bootstrap/Accordion";
 
 export function EmblaCarousel({ images }) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -54,18 +55,26 @@ const ProductTable = ({ productData }) => {
         {productData.map((section, index) => (
           <React.Fragment key={index}>
             {/* Kategori-rubrik */}
-            <tr>
-              <th colSpan="2" className="category-header">
-                {section.category}
-              </th>
-            </tr>
-            {/* Attribut */}
-            {section.attributes.map((attribute, attrIndex) => (
-              <tr key={attrIndex} className="attribute-row">
-                <td className="attribute-name">{attribute.name}</td>
-                <td className="attribute-value">{attribute.value}</td>
-              </tr>
-            ))}
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>
+                  <tr>
+                    <th colSpan="2" className="category-header">
+                      {section.category}
+                    </th>
+                  </tr>
+                </Accordion.Header>
+                {/* Attribut */}
+                <Accordion.Body>
+                  {section.attributes.map((attribute, attrIndex) => (
+                    <tr key={attrIndex} className="attribute-row">
+                      <td className="attribute-name">{attribute.name}</td>
+                      <td className="attribute-value">{attribute.value}</td>
+                    </tr>
+                  ))}
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
           </React.Fragment>
         ))}
       </tbody>
@@ -175,7 +184,7 @@ export default function ProductPage() {
               {/* More Info Section */}
               <div style={{ padding: "20px" }}>
                 <h5>Produktinformation</h5>
-                <ProductTable productData={product.data} />
+                <ProductTable productData={product?.data} />
               </div>
             </div>
           </div>

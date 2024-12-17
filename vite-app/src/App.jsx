@@ -15,9 +15,7 @@ function App() {
 
     return (
         <BrowserRouter>
-
             <HeaderComp/>
-
             <Routes>
                 <Route path="/" element={<HomePage/>}></Route>
                 <Route path="/product/:id" element={<ProductPage/>}></Route>

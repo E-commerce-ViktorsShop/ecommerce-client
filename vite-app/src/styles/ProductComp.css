@@ -17,6 +17,14 @@
 .product:hover {
 	transform: scale(1.05);
 	box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+
+
+	border: solid 1px #000000;
+	border-radius: 10px;
+	background-color: #fff;
+	height: 100%;
+	padding: 1rem;
+
 }
 
 .image {

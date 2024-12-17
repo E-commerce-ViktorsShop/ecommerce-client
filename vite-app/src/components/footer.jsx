@@ -1,17 +1,15 @@
 import React from 'react';
 import '../styles/footer.css'; // External CSS file for styles
-
+import {categories} from "../utils/static.js";
 export default function FooterComp() {
     return (
         <footer className="footer">
             {/* Footer Navigation Links */}
             <div className="footer-links">
                 <ul>
-                    <li><a href="#" className="list-links">Mössor</a></li>
-                    <li><a href="#" className="list-links">Tröjor</a></li>
-                    <li><a href="#" className="list-links">Byxor</a></li>
-                    <li><a href="#" className="list-links">Strumpor</a></li>
-                    <li><a href="#" className="list-links">Skor</a></li>
+                    {categories.map(category => (
+                        <li key={category}><a href={`/categories/${category}`} className={"list-links"}>{category}</a></li>
+                    ))}
                 </ul>
             </div>
 

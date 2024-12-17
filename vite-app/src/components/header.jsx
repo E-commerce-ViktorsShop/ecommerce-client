@@ -1,21 +1,11 @@
 import React, {useState} from 'react';
 import '../styles/header.css'; // CSS styles moved to an external file or styled-components
 import {useNavigate} from "react-router-dom";
-
+import {categories} from "../utils/static.js";
 export default function HeaderComp() {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-    const categories = [
-        'Apple',
-        'Datorer & Tillbehör',
-        'Datorkomponenter',
-        'Hem & Hälsa',
-        'Leksaker & Hobby',
-        'Mobil',
-        'Nätverk & Smarta Hem',
-        'Spel',
-        'TV, Ljud & Bild'
-    ]
+
 
     function submitHandler(event) {
         event.preventDefault()

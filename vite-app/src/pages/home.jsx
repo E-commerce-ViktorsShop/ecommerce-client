@@ -43,6 +43,7 @@ export default function HomePage() {
                 localStorage.setItem(cacheKey, JSON.stringify(data));
             }
 
+
             // Ensure data is an array before setting the state
             setFilteredProducts(Array.isArray(data) ? data : []);
         } catch (error) {
@@ -50,6 +51,7 @@ export default function HomePage() {
             setFilteredProducts([]); // Fallback to an empty array on error
         }
     }
+
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
@@ -62,7 +64,7 @@ export default function HomePage() {
 
     return (
         <>
-            <img src={"/banners/banner.jpg"} className='mb-2 mt-5 w-100'/>
+            <img src={"/banners/banner.jpg"} className='mb-2 w-100'/>
             <main className='mt-0 mb-5' style={{background: '#f6f6f6'}}>
                 <h2 className='text-center mt-5 mb-5'>
                     {searchTerm

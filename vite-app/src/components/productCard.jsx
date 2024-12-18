@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import '../styles/ProductComp.css';
-import {Link} from 'react-router';
+
 import LoadingSpinner from "./loaders/spinner.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Link } from 'react-router-dom';
+
 
 
 export default function ProductComp({product}) {

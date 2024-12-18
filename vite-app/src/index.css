@@ -1,5 +1,4 @@
 :root {
-
 	--font-primary: 'Roboto', sans-serif;
 	--primary-color: #001524;
 	--secondary-color: #15616d;
@@ -15,8 +14,8 @@
 
 html,
 body {
-	height: 100%;
-	overflow-x: hidden;
+	height: 100vh;
+	/* overflow-x: hidden; */
 	padding: 0;
 	margin: 0;
 }

@@ -26,7 +26,7 @@ export default function HomePage() {
                 try {
                     data = JSON.parse(cachedData);
                 } catch (error) {
-                    console.error('Error parsing cached data:', error);
+                    console.log('Error parsing cached data:', error);
                     data = []; // Fallback if parsing fails
                 }
             } else {

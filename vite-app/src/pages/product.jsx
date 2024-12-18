@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/product.css";
@@ -8,7 +8,6 @@ import Accordion from "react-bootstrap/Accordion";
 
 export function EmblaCarousel({ images }) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
-  const [loading, setLoading] = useState(false);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -22,34 +21,24 @@ export function EmblaCarousel({ images }) {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {images?.map((image) => (
-            <div className="embla__slide">
+          {images?.map((image, index) => (
+            <div className="embla__slide" key={index}>
               <img
-                src={`https://cdn.webhallen.com${image.large}&w=500
-              `}
-                alt="product image"
+                src={`https://cdn.webhallen.com${image.large}&w=500`}
+                alt="product"
                 className="img-fluid pt-5"
                 onError={(e) => (e.target.src = "/path/to/fallback-image.jpg")}
-				style={{
-					display: loading ? 'none' : 'block',
-					width: '500px',
-					height: 'auto',
-					objectFit: 'contain',
-				}}
+                style={{ objectFit: "contain", width: "100%", height: "auto" }}
               />
             </div>
           ))}
         </div>
       </div>
-	  <button className="embla__button embla__button--prev" onClick={scrollPrev}>
-        <svg width="24" height="24" viewBox="0 0 24 24">
-          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-        </svg>
+      <button className="embla__button embla__button--prev" onClick={scrollPrev}>
+        Prev
       </button>
       <button className="embla__button embla__button--next" onClick={scrollNext}>
-        <svg width="24" height="24" viewBox="0 0 24 24">
-          <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-        </svg>
+        Next
       </button>
     </div>
   );
@@ -57,7 +46,7 @@ export function EmblaCarousel({ images }) {
 
 const ProductTable = ({ productData }) => {
   if (!productData || productData.length === 0) {
-    return <p>Ingen produktinformation tillgänglig.</p>;
+    return <p>No product information available.</p>;
   }
 
   return (
@@ -65,22 +54,14 @@ const ProductTable = ({ productData }) => {
       <tbody>
         {productData.map((section, index) => (
           <React.Fragment key={index}>
-            {/* Kategori-rubrik */}
             <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>
-                  <tr>
-                    <th colSpan="2" className="category-header">
-                      {section.category}
-                    </th>
-                  </tr>
-                </Accordion.Header>
-                {/* Attribut */}
+              <Accordion.Item eventKey={index.toString()}>
+                <Accordion.Header>{section.category}</Accordion.Header>
                 <Accordion.Body>
                   {section.attributes.map((attribute, attrIndex) => (
-                    <tr key={attrIndex} className="attribute-row">
-                      <td className="attribute-name">{attribute.name}</td>
-                      <td className="attribute-value text-end">{attribute.value}</td>
+                    <tr key={attrIndex}>
+                      <td>{attribute.name}</td>
+                      <td>{attribute.value}</td>
                     </tr>
                   ))}
                 </Accordion.Body>
@@ -94,36 +75,39 @@ const ProductTable = ({ productData }) => {
 };
 
 export default function ProductPage() {
-  const [product, setProduct] = useState("");
+  const { id } = useParams();
+  const location = useLocation();
+  const [product, setProduct] = useState(location.state?.product || {});
+  const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const params = useParams();
-  const id = params.id;
 
   useEffect(() => {
-    async function fetchProduct(id) {
+    if (product && product._id) {
+      setLoading(false);
+      return;
+    }
+
+    async function fetchProduct(productId) {
       try {
         const response = await fetch(
-          `https://ecommerce-api-sandy.vercel.app/products/${id}`
+          `https://ecommerce-api-sandy.vercel.app/products/${productId}`
         );
-        if (!response.ok) {
-          throw new Error("HTTP error code: " + response.status);
-        }
+        if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
-        console.log(data);
         setProduct(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchProduct(id);
-  }, [id]);
+  }, [id, product]);
 
-  const handleQuantityChange = (event) => {
-    const value = parseInt(event.target.value);
-    if (value > 0) {
-      setQuantity(value);
-    }
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (value > 0) setQuantity(value);
   };
 
   const handleAddToCart = () => {
@@ -131,76 +115,57 @@ export default function ProductPage() {
       id: product._id,
       name: product.name,
       price: product.price,
-      quantity: quantity,
+      quantity,
     };
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const existingItemIndex = cart.findIndex((item) => item.id === cartItem.id);
 
     if (existingItemIndex !== -1) {
-      // Uppdatera kvantitet om produkten redan finns
-      cart[existingItemIndex].quantity += cartItem.quantity;
+      cart[existingItemIndex].quantity += quantity;
     } else {
-      // Lägg till produkten om den inte finns
       cart.push(cartItem);
     }
 
-    // Uppdatera local storage
     localStorage.setItem("cart", JSON.stringify(cart));
     alert("Product added to cart!");
   };
 
-  return (
-    <>
-      {/* Main Content */}
-      <main className="container mb-5">
-        <div className="container-lg mb-5">
-          <div className="row align-items-center">
-            {/* Product Images Section */}
-            <div className="col-6">
-              <div className="d-flex justify-content-between">
-                <EmblaCarousel images={product?.images} />
-              </div>
-            </div>
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-            {/* Product Information Section */}
-            <div className="col-6 pt-5">
-              <h2 className="mb-3">{product.name}</h2>
-              <h3 className="mb-3">{product?.price?.$numberDecimal || 0} kr</h3>
-              <p className="mb-4">{product.subTitle}</p>
-              <p className="mb-4">Article number: {product._id}</p>
-              {/* Quantity Input */}
-              <div className="mb-4" id="quantity-box">
-                <label htmlFor="quantity" className="form-label">
-                  Quantity:
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="quantity"
-                  value={quantity}
-                  min="1"
-                  onChange={handleQuantityChange}
-                />
-              </div>
-              {/* Add to Cart Button */}
-              <button
-                className="btn btn-lg mb-3"
-                type="button"
-                id="add-to-cart-btn"
-                onClick={handleAddToCart}
-              >
-                Add to cart
-              </button>
-              {/* More Info Section */}
-            </div>
-            <div className="my-5 px-5">
-              <h4>Produktinformation</h4>
-              <ProductTable productData={product?.data} />
-            </div>
-          </div>
+  return (
+    <main className="container mb-5">
+      <div className="row align-items-center">
+        <div className="col-md-6">
+          <EmblaCarousel images={product?.images} />
         </div>
-      </main>
-    </>
+        <div className="col-md-6">
+          <h2>{product.name}</h2>
+          <h3>{product?.price?.$numberDecimal || 0} kr</h3>
+          <p>{product.subTitle}</p>
+          <p>Article number: {product._id}</p>
+          <div className="mb-4">
+            <label htmlFor="quantity">Quantity:</label>
+            <input
+              type="number"
+              id="quantity"
+              className="form-control"
+              value={quantity}
+              min="1"
+              onChange={handleQuantityChange}
+            />
+          </div>
+          <button className="btn btn-primary" onClick={handleAddToCart}>
+            Add to cart
+          </button>
+        </div>
+      </div>
+      <div className="mt-5">
+        <h4>Product Information</h4>
+        <ProductTable productData={product?.data} />
+      </div>
+    </main>
   );
 }

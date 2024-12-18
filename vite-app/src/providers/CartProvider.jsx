@@ -20,28 +20,37 @@ export const CartProvider = ({children}) => {
 
     // Save cart to localStorage whenever it changes
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
+        if (cart.length > 0) {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
     }, [cart]);
 
     // Add an item to the cart
     const addToCart = (item) => {
         setCart((prevCart) => {
-            // Check if item is already in cart
             const existingItem = prevCart.find((cartItem) => cartItem._id === item._id);
 
             if (existingItem) {
                 // Update quantity if item already exists
                 return prevCart.map((cartItem) =>
                     cartItem._id === item._id
-                        ? {...cartItem, quantity: cartItem.quantity + 1}
+                        ? {...cartItem, quantity: cartItem.quantity + item.quantity}
                         : cartItem
                 );
             }
 
-            // Add new item to cart
+            // Add new item to cart if it doesn't already exist
             return [...prevCart, {...item, quantity: 1}];
         });
     };
+
+    const cartQuantity = () => {
+        let total = 0;
+        cart.forEach((cartItem) => {
+            total += cartItem.quantity;
+        })
+        return total;
+    }
 
     // Remove an item from the cart
     const removeFromCart = (id) => {
@@ -54,7 +63,7 @@ export const CartProvider = ({children}) => {
     };
 
     return (
-        <CartContext.Provider value={{cart, addToCart, removeFromCart, clearCart}}>
+        <CartContext.Provider value={{cart, addToCart, removeFromCart, clearCart, cartQuantity}}>
             {children}
         </CartContext.Provider>
     );

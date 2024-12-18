@@ -1,4 +1,3 @@
-
 body {
   background-color: #f6f6f6;
 }
@@ -16,18 +15,19 @@ main {
 #add-to-cart-btn {
   background-color: var(--call-to-action);
   color: white;
+  border: 1px black solid;
   transition: all 200ms ease-in-out;
 }
 
 #add-to-cart-btn:active {
-	transform: scale(0.95)
+  transform: scale(0.95);
 }
 
 #quantity-box {
   width: 80px;
 }
 
-/* Embla carosuel styling */
+/* Embla carousel styling */
 .embla {
   max-width: 48rem;
   height: fit-content;
@@ -48,7 +48,7 @@ main {
   touch-action: pan-y pinch-zoom;
   margin-left: calc(var(--slide-spacing) * -1);
   max-height: 500px;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .embla__slide {
@@ -81,24 +81,24 @@ main {
 }
 
 .embla__button svg {
-  fill: #000; /* Färg för knappen */
+  fill: #000;
   width: 24px;
   height: 24px;
 }
 
 .embla__button:hover svg {
-  fill: #007bff; /* Färg vid hover */
+  fill: #007bff;
 }
 
 /* Style accordion */
 .category-header {
-  border-bottom: none;
+  text-align: left;
+  font-size: 1.1rem;
+  padding-top: 15px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f9f9f9;
   padding: 0.5rem 0;
   display: flex;
-  transform: translate3d(0, 0, 0);
-  flex: 0 0 var(--slide-size);
-  min-width: 0;
-  padding-left: var(--slide-spacing);
   justify-content: center;
   color: black;
 }
@@ -119,8 +119,8 @@ main {
 }
 
 .accordion-body tr {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .attribute-row td {

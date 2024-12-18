@@ -25,6 +25,7 @@ export default function HomePage() {
             if (cachedData) {
                 try {
                     data = JSON.parse(cachedData);
+                    console.log(data)
                 } catch (error) {
                     console.log('Error parsing cached data:', error);
                     data = []; // Fallback if parsing fails
@@ -36,10 +37,11 @@ export default function HomePage() {
                     data = await fetchProductsBySearch(query, page, limit);
                 } else {
                     // Fetch all products (no search query)
-                    data = await fetchProducts();
+                    data = await fetchProducts(limit, page);
                 }
 
                 // Store the fetched data in localStorage under the generated cache key
+
                 localStorage.setItem(cacheKey, JSON.stringify(data));
             }
 

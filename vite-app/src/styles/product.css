@@ -48,7 +48,7 @@ main {
   touch-action: pan-y pinch-zoom;
   margin-left: calc(var(--slide-spacing) * -1);
   max-height: 500px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .embla__slide {
@@ -94,7 +94,6 @@ main {
 .category-header {
   text-align: left;
   font-size: 1.1rem;
-  padding-top: 15px;
   border-bottom: 1px solid #ccc;
   background-color: #f9f9f9;
   padding: 0.5rem 0;

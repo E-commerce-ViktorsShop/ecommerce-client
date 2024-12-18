@@ -3,11 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {fetchProducts, fetchProductsBySearch} from '../utils/functions.js';
 import ProductComp from '../components/productCard.jsx';
 import {useLocation} from 'react-router';
+import ProductCompLoader from "../components/loaders/loadingProductCard.jsx";
 
 export default function HomePage() {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const location = useLocation();
+    const [loading, setLoading] = useState(true);
+
+    const placeholderArray = new Array(10);
 
     async function fetchData(query = '', page = 1, limit = 20) {
         try {
@@ -53,6 +57,7 @@ export default function HomePage() {
         setSearchTerm(searchTerm);
 
         fetchData(searchTerm);
+        setLoading(false)
     }, [location.search]);
 
     return (
@@ -69,14 +74,22 @@ export default function HomePage() {
                     id='product-list'
                     className='row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 container-lg m-auto pb-5'
                 >
-                    {filteredProducts.length > 0
-                        ? filteredProducts.map((product) => (
-                            <ProductComp key={product._id} product={product}/>
-                        ))
-                        : // Empty
-                        null}
+                    {/*TODO : Never displays fix needed*/}
+                    {loading ?? placeholderArray.map((_, index) => (
+                        <ProductCompLoader key={index}/>
+                    ))}
+                    {/*__________________________________*/}
+                    {
+                        filteredProducts.length > 0
+                            ? filteredProducts.map((product) => (
+                                <ProductComp key={product._id} product={product}/>
+                            ))
+                            : // Loading product cards
+                            null
+                    }
                 </ul>
             </main>
         </>
-    );
+    )
+        ;
 }

@@ -34,7 +34,7 @@ export const CartProvider = ({children}) => {
                 // Update quantity if item already exists
                 return prevCart.map((cartItem) =>
                     cartItem._id === item._id
-                        ? {...cartItem, quantity: cartItem.quantity + 1}
+                        ? {...cartItem, quantity: cartItem.quantity + item.quantity}
                         : cartItem
                 );
             }

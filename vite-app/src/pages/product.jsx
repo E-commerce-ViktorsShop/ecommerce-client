@@ -5,10 +5,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/product.css";
 import useEmblaCarousel from "embla-carousel-react";
 import Accordion from "react-bootstrap/Accordion";
-
+import {useCart} from "../providers/CartProvider.jsx";
+import {useLocation} from "react-router-dom";
+import LoadingSpinner from "../components/loaders/spinner.jsx";
 
 export function EmblaCarousel({images}) {
     const [emblaRef, emblaApi] = useEmblaCarousel();
+    const [loading, setLoading] = useState(true); // To track if images are loading
 
     const scrollPrev = useCallback(() => {
         if (emblaApi) emblaApi.scrollPrev();
@@ -18,18 +21,28 @@ export function EmblaCarousel({images}) {
         if (emblaApi) emblaApi.scrollNext();
     }, [emblaApi]);
 
+    const handleImageLoad = () => {
+        // When an image is loaded, we set the loading state to false
+        setLoading(false);
+    };
+
     return (
         <div className='embla'>
             <div className='embla__viewport' ref={emblaRef}>
                 <div className='embla__container'>
-                    {images?.map((image) => (
-                        <div className='embla__slide'>
+                    {images?.map((image, index) => (
+                        <div key={index} className='embla__slide'>
+                            {loading && (
+                                // Show a loading indicator while images are loading
+                                <LoadingSpinner/>
+                            )}
                             <img
-                                src={`https://cdn.webhallen.com${image.large}&w=500
-              `}
+                                src={`https://cdn.webhallen.com${image.large}&w=500`}
                                 alt='product image'
                                 className='img-fluid'
+                                onLoad={handleImageLoad}
                                 onError={(e) => (e.target.src = '/path/to/fallback-image.jpg')}
+                                style={{display: loading ? 'none' : 'block'}} // Hide the image until it has loaded
                             />
                         </div>
                     ))}
@@ -84,30 +97,42 @@ const ProductTable = ({productData}) => {
 };
 
 export default function ProductPage() {
-    const [product, setProduct] = useState("");
+    const location = useLocation()
+    const [product, setProduct] = useState(location.state?.product || {}); // Use location.state if available
+    const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
     const params = useParams();
     const id = params.id;
+    const {addToCart} = useCart() //custom hook to handle cart
 
     useEffect(() => {
+        // If product is already available, don't fetch again
+        if (product && product._id) {
+            setLoading(false)
+            return;
+        }
+
         async function fetchProduct(id) {
             try {
                 const response = await fetch(
-                    `https://ecommerce-api-sandy.vercel.app/products/${id}`
-                );
+                        `https
+            ://ecommerce-api-sandy.vercel.app/products/${id}`
+                    )
+                ;
                 if (!response.ok) {
                     throw new Error("HTTP error code: " + response.status);
                 }
                 const data = await response.json();
-                console.log(data);
                 setProduct(data);
             } catch (error) {
                 console.log(error);
+            } finally {
+                setLoading(false)
             }
         }
 
         fetchProduct(id);
-    }, [id]);
+    }, [id, product]); // Trigger fetch only when product is not available
 
     const handleQuantityChange = (event) => {
         const value = parseInt(event.target.value);
@@ -118,29 +143,18 @@ export default function ProductPage() {
 
     const handleAddToCart = () => {
         const cartItem = {
-            id: product._id,
+            _id: product._id,
             name: product.name,
             price: product.price,
-            quantity: quantity,
+            quantity: quantity
         };
 
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existingItemIndex = cart.findIndex((item) => item.id === cartItem.id);
 
-        if (existingItemIndex !== -1) {
-            // Uppdatera kvantitet om produkten redan finns
-            cart[existingItemIndex].quantity += cartItem.quantity;
-        } else {
-            // Lägg till produkten om den inte finns
-            cart.push(cartItem);
-        }
-
-        // Uppdatera local storage
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert("Product added to cart!");
+        // Use the context function to add the product to the cart
+        addToCart(cartItem);
     };
-
     return (
+
         <>
             {/* Main Content */}
             <main className="container mb-5">
@@ -148,7 +162,7 @@ export default function ProductPage() {
                     <div className="row align-items-center">
                         {/* Product Images Section */}
                         <div className="col-6">
-                            <div className="d-flex justify-content-between">
+                            <div className="d-flex">
                                 <EmblaCarousel images={product?.images}/>
                             </div>
                         </div>
@@ -193,5 +207,6 @@ export default function ProductPage() {
             </main>
         </>
     );
-};
 
+}
+;

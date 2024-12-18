@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchProducts } from '../utils/functions.js';
+import { fetchProductsByCategory } from '../utils/functions.js';
 import ProductComp from '../components/productCard.jsx';
 import { useParams } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export default function CategoryPage() {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await fetchProducts();
+			const data = await fetchProductsByCategory(category);
 			setProducts(data);
 			return data;
 		}

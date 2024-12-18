@@ -27,3 +27,16 @@ export async function fetchProductsBySearch(query, page = 1, limit = 10) {
         return [];
     }
 }
+
+export async function fetchProductsByCategory(category) {
+    try {
+        const response = await fetch(
+            `https://ecommerce-api-sandy.vercel.app/categories/${category}`
+        );
+        if (!response.ok) throw new Error('Failed to fetch search results');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+        return [];
+    }
+}

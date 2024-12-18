@@ -13,7 +13,7 @@ export default function ProductComp({product}) {
     return (
         <>
             <Link to={`/product/${product._id}`} state={{product}} style={{textDecoration: 'none'}}>
-                <li className='product'>
+                <div className='product'>
                     <div
                         className='d-flex flex-column justify-content-between align-items-center p-2'
                         style={{height: '100%'}}
@@ -59,7 +59,7 @@ export default function ProductComp({product}) {
                             {product.price.$numberDecimal} kr
                         </p>
                     </div>
-                </li>
+                </div>
             </Link>
         </>
     )

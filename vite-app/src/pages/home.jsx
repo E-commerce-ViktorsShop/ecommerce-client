@@ -64,7 +64,7 @@ export default function HomePage() {
 
     return (
         <>
-            <img src={"/banners/banner.jpg"} className='mb-2 w-100'/>
+            <img src={"/banners/banner.jpg"} className='mb-2 w-100' alt={"christmas banner"}/>
             <main className='mt-0 mb-5' style={{background: '#f6f6f6'}}>
                 <h2 className='text-center mt-5 mb-5'>
                     {searchTerm
@@ -84,7 +84,9 @@ export default function HomePage() {
                     {
                         filteredProducts.length > 0
                             ? filteredProducts.map((product) => (
-                                <ProductComp key={product._id} product={product}/>
+                                <li key={product._id} className='list-unstyled'>
+                                    <ProductComp product={product}/>
+                                </li>
                             ))
                             : // Loading product cards
                             null

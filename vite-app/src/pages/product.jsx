@@ -8,6 +8,7 @@ import Accordion from "react-bootstrap/Accordion";
 
 export function EmblaCarousel({ images }) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
+  const [loading, setLoading] = useState(false);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -27,8 +28,14 @@ export function EmblaCarousel({ images }) {
                 src={`https://cdn.webhallen.com${image.large}&w=500
               `}
                 alt="product image"
-                className="img-fluid"
+                className="img-fluid pt-5"
                 onError={(e) => (e.target.src = "/path/to/fallback-image.jpg")}
+				style={{
+					display: loading ? 'none' : 'block',
+					width: '500px',
+					height: 'auto',
+					objectFit: 'contain',
+				}}
               />
             </div>
           ))}
@@ -73,7 +80,7 @@ const ProductTable = ({ productData }) => {
                   {section.attributes.map((attribute, attrIndex) => (
                     <tr key={attrIndex} className="attribute-row">
                       <td className="attribute-name">{attribute.name}</td>
-                      <td className="attribute-value">{attribute.value}</td>
+                      <td className="attribute-value text-end">{attribute.value}</td>
                     </tr>
                   ))}
                 </Accordion.Body>
@@ -157,7 +164,7 @@ export default function ProductPage() {
             </div>
 
             {/* Product Information Section */}
-            <div className="col-6">
+            <div className="col-6 pt-5">
               <h2 className="mb-3">{product.name}</h2>
               <h3 className="mb-3">{product?.price?.$numberDecimal || 0} kr</h3>
               <p className="mb-4">{product.subTitle}</p>
@@ -187,7 +194,7 @@ export default function ProductPage() {
               </button>
               {/* More Info Section */}
             </div>
-            <div className="mt-5 mb-5">
+            <div className="my-5 px-5">
               <h4>Produktinformation</h4>
               <ProductTable productData={product?.data} />
             </div>

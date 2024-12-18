@@ -1,54 +1,60 @@
-#add-to-cart-btn {
-	background-color: var(--call-to-action);
-	border: 1px black solid;
-}
-
-#quantity-box {
-	width: 80px;
-}
 
 body {
-	background-color: #f6f6f6;
+  background-color: #f6f6f6;
 }
 
 main {
-	background-color: rgb(255, 255, 255);
-	margin-top: 6rem;
+  background-color: rgb(255, 255, 255);
+  margin-top: 6rem;
 }
 
 .custom-size {
-	width: auto;
-	height: 60%;
+  width: auto;
+  height: 60%;
 }
 
+#add-to-cart-btn {
+  background-color: var(--call-to-action);
+  color: white;
+  transition: all 200ms ease-in-out;
+}
+
+#add-to-cart-btn:active {
+	transform: scale(0.95)
+}
+
+#quantity-box {
+  width: 80px;
+}
+
+/* Embla carosuel styling */
 .embla {
-	max-width: 48rem;
-	height: fit-content;
-	margin: auto;
-	--slide-height: 19rem;
-	--slide-spacing: 1rem;
-	--slide-size: 100%;
-	position: relative;
+  max-width: 48rem;
+  height: fit-content;
+  margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+  position: relative;
 }
 
 .embla__viewport {
-	overflow: hidden;
-	height: fit-content;
-
+  overflow: hidden;
+  height: 500px;
 }
 
 .embla__container {
-	display: flex;
-	touch-action: pan-y pinch-zoom;
-	margin-left: calc(var(--slide-spacing) * -1);
-	max-height: 500px;
-	justify-content: center;
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+  max-height: 500px;
+  justify-content: flex-start;
 }
 
 .embla__slide {
   display: flex;
   transform: translate3d(0, 0, 0);
-  flex: 0 0 var(--slide-size);
+  flex: 0 0 100%;
   min-width: 0;
   padding-left: var(--slide-spacing);
   justify-content: center;
@@ -57,52 +63,70 @@ main {
 }
 
 .embla__button {
-	background: none;
-	border: none;
-	cursor: pointer;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	z-index: 10;
-  }
-  
-  .embla__button--prev {
-	left: 10px;
-  }
-  
-  .embla__button--next {
-	right: 10px;
-  }
-  
-  .embla__button svg {
-	fill: #000; /* Färg för knappen */
-	width: 24px;
-	height: 24px;
-  }
-  
-  .embla__button:hover svg {
-	fill: #007bff; /* Färg vid hover */
-  }
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.embla__button--prev {
+  left: 10px;
+}
+
+.embla__button--next {
+  right: 10px;
+}
+
+.embla__button svg {
+  fill: #000; /* Färg för knappen */
+  width: 24px;
+  height: 24px;
+}
+
+.embla__button:hover svg {
+  fill: #007bff; /* Färg vid hover */
+}
+
+/* Style accordion */
+.category-header {
+  border-bottom: none;
+  padding: 0.5rem 0;
+  display: flex;
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  justify-content: center;
+  color: black;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #f6f6f6;
+}
+
+.accordion-button {
+  background-color: #f6f6f6;
+}
 
 /* Style product data table */
 .product-table {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  padding: 0.75rem;
 }
 
-.category-header {
-  text-align: left;
-  font-size: 1.1rem;
-  padding-top: 15px;
-  border-bottom: 1px solid #ccc;
-  background-color: #f9f9f9;
+.accordion-body tr {
+	display: flex;
+	flex-direction: row;
 }
 
 .attribute-row td {
   padding: 8px;
   border-bottom: 1px solid #eee;
+  flex: auto;
 }
 
 .attribute-name {
@@ -113,65 +137,4 @@ main {
 
 .attribute-value {
   color: #555;
-}
-  
-
-/* Style accordion */
-th.category-header {
-  background-color: #fff;
-  border-bottom: none;
-  padding: 0.5rem 0;
-	display: flex;
-	transform: translate3d(0, 0, 0);
-	flex: 0 0 var(--slide-size);
-	min-width: 0;
-	padding-left: var(--slide-spacing);
-	justify-content: center;
-}
-
-.embla__slide__number {
-	box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
-	border-radius: 1.8rem;
-	font-size: 4rem;
-	font-weight: 600;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: var(--slide-height);
-	user-select: none;
-}
-
-.accordion-button:not(.collapsed) {
-	background-color: #fff;
-}
-
-
-/* Style product data tabel */
-.product-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
-
-.category-header {
-	text-align: left;
-	font-size: 1.1rem;
-	padding-top: 15px;
-	border-bottom: 1px solid #ccc;
-	background-color: #f9f9f9;
-}
-
-.attribute-row td {
-	padding: 8px;
-	border-bottom: 1px solid #eee;
-}
-
-.attribute-name {
-	width: 50%;
-	font-weight: bold;
-	color: #333;
-}
-
-.attribute-value {
-	color: #555;
 }

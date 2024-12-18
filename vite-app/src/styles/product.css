@@ -91,7 +91,6 @@ th.category-header {
   background-color: #fff;
   border-bottom: none;
   padding: 0.5rem 0;
-}
 	display: flex;
 	transform: translate3d(0, 0, 0);
 	flex: 0 0 var(--slide-size);
@@ -111,6 +110,11 @@ th.category-header {
 	height: var(--slide-height);
 	user-select: none;
 }
+
+.accordion-button:not(.collapsed) {
+	background-color: #fff;
+}
+
 
 /* Style product data tabel */
 .product-table {

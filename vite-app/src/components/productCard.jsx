@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/ProductComp.css';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default function ProductComp({ product }) {
 	return (

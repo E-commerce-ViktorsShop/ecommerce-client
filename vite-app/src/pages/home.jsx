@@ -46,7 +46,7 @@ export default function HomePage() {
 
 	return (
 		<>
-			<img src={Banner} className='mb-2 mt-5 w-100' />
+			<img src={Banner} className='mb-2 w-100' />
 			<main className='mt-0 mb-5' style={{ background: '#f6f6f6' }}>
 				<h2 className='text-center mt-5 mb-5'>
 					{searchTerm

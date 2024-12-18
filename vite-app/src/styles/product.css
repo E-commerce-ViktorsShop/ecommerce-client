@@ -28,11 +28,13 @@ main {
 	--slide-height: 19rem;
 	--slide-spacing: 1rem;
 	--slide-size: 100%;
+	position: relative;
 }
 
 .embla__viewport {
 	overflow: hidden;
 	height: fit-content;
+
 }
 
 .embla__container {
@@ -53,6 +55,34 @@ main {
   margin-right: 20px;
   margin-left: 10px;
 }
+
+.embla__button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 10;
+  }
+  
+  .embla__button--prev {
+	left: 10px;
+  }
+  
+  .embla__button--next {
+	right: 10px;
+  }
+  
+  .embla__button svg {
+	fill: #000; /* Färg för knappen */
+	width: 24px;
+	height: 24px;
+  }
+  
+  .embla__button:hover svg {
+	fill: #007bff; /* Färg vid hover */
+  }
 
 /* Style product data table */
 .product-table {

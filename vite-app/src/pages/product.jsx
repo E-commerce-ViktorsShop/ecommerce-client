@@ -26,6 +26,7 @@ export function EmblaCarousel({images}) {
 
                     {images?.map((image, index) => (
                         <div className="embla__slide" key={index}>
+                            {loading && <LoadingSpinner/>}
                             <img
                                 src={`https://cdn.webhallen.com${image.large}&w=500`}
                                 alt="product"

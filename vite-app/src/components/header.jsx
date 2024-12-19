@@ -84,9 +84,9 @@ export default function HeaderComp() {
                     <ul className="nav justify-content-evenly">
                         {categories.map((category, index) => (
                             <li className="nav-item" key={index}>
-                                <a className="nav-link text-white" href={`/categories/${category}`}>
+                                <Link to={`/categories/${category}`} className="nav-link text-white">
                                     {category}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>

@@ -3,10 +3,9 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 // Create the Cart Context
 const CartContext = createContext([]);
 
-// Custom Hook for easier access to CartContext
+// Custom Hook for access to CartContext
 export const useCart = () => useContext(CartContext);
 
-// Cart Provider Component
 export const CartProvider = ({children}) => {
     const [cart, setCart] = useState([]);
 
@@ -33,7 +32,7 @@ export const CartProvider = ({children}) => {
             if (existingItem) {
                 // Update quantity if item already exists
                 return prevCart.map((cartItem) =>
-                    cartItem._id === item._id
+                    cartItem.id === item.id
                         ? {...cartItem, quantity: cartItem.quantity + item.quantity}
                         : cartItem
                 );
@@ -78,14 +77,12 @@ export const CartProvider = ({children}) => {
             return prevCart;
         });
     };
+    //get total number of items in cart
 
-
-    // Remove an item from the cart
     const removeFromCart = (id) => {
-        setCart((prevCart) => prevCart.filter((item) => item._id !== id));
+        setCart((prevCart) => prevCart.filter((item) => item.id !== id));
     };
 
-    // Clear the cart
     const clearCart = () => {
         setCart([]);
         localStorage.removeItem("cart");

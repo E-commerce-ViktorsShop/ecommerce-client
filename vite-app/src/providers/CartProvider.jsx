@@ -28,7 +28,7 @@ export const CartProvider = ({children}) => {
     // Add an item to the cart
     const addToCart = (item) => {
         setCart((prevCart) => {
-            const existingItem = prevCart.find((cartItem) => cartItem._id === item._id);
+            const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
 
             if (existingItem) {
                 // Update quantity if item already exists
@@ -43,7 +43,7 @@ export const CartProvider = ({children}) => {
             return [...prevCart, {...item, quantity: 1}];
         });
     };
-
+    //get total amount of items in cart
     const cartQuantity = () => {
         let total = 0;
         cart.forEach((cartItem) => {
@@ -51,6 +51,34 @@ export const CartProvider = ({children}) => {
         })
         return total;
     }
+    //changes an item in the cart
+    const changeCartItem = (item) => {
+        setCart((prevCart) => {
+            const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
+
+            if (existingItem) {
+                if (item.quantity > 0) {
+                    // Update quantity
+                    return prevCart.map((cartItem) =>
+                        cartItem.id === item.id
+                            ? {...cartItem, quantity: item.quantity}
+                            : cartItem
+                    );
+                } else {
+                    // Remove item if quantity is zero
+                    return prevCart.filter((cartItem) => cartItem.id !== item.id);
+                }
+            }
+
+            // If item doesn’t exist, add it only if quantity > 0
+            if (item.quantity > 0) {
+                return [...prevCart, item];
+            }
+
+            return prevCart;
+        });
+    };
+
 
     // Remove an item from the cart
     const removeFromCart = (id) => {
@@ -60,10 +88,11 @@ export const CartProvider = ({children}) => {
     // Clear the cart
     const clearCart = () => {
         setCart([]);
+        localStorage.removeItem("cart");
     };
 
     return (
-        <CartContext.Provider value={{cart, addToCart, removeFromCart, clearCart, cartQuantity}}>
+        <CartContext.Provider value={{cart, addToCart, removeFromCart, clearCart, cartQuantity, changeCartItem}}>
             {children}
         </CartContext.Provider>
     );

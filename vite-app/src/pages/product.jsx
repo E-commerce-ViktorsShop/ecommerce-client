@@ -6,6 +6,7 @@ import "../styles/product.css";
 import useEmblaCarousel from "embla-carousel-react";
 import Accordion from "react-bootstrap/Accordion";
 import LoadingSpinner from "../components/loaders/spinner.jsx";
+import {useCart} from "../providers/CartProvider.jsx";
 
 
 export function EmblaCarousel({images}) {
@@ -90,6 +91,7 @@ export default function ProductPage() {
     const [product, setProduct] = useState(location.state?.product || {});
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
+    const {addToCart} = useCart()
 
     useEffect(() => {
         if (product && product._id) {
@@ -125,20 +127,11 @@ export default function ProductPage() {
             id: product._id,
             name: product.name,
             price: product.price,
+            image: product.thumbNail,
             quantity,
         };
+        addToCart(cartItem)
 
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const existingItemIndex = cart.findIndex((item) => item.id === cartItem.id);
-
-        if (existingItemIndex !== -1) {
-            cart[existingItemIndex].quantity += quantity;
-        } else {
-            cart.push(cartItem);
-        }
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert("Product added to cart!");
     };
 
     if (loading) {

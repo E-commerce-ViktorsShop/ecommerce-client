@@ -4,12 +4,14 @@ import {useNavigate} from "react-router-dom";
 import {categories} from "../utils/static.js";
 import {Link} from "react-router-dom"; // make sure to use "react-router-dom" instead of "react-router"
 import {useCart} from "../providers/CartProvider.jsx";
+import CartComp from "./cartComp.jsx";
 
 export default function HeaderComp() {
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
-    const {cartQuantity} = useCart();
+    const {cartQuantity, cart} = useCart();
     const cartNum = cartQuantity();
+    const [showCart, setShowCart] = useState(false);
 
     function submitHandler(event) {
         event.preventDefault();
@@ -47,7 +49,11 @@ export default function HeaderComp() {
                 </form>
 
                 {/* Cart Icon Section */}
-                <div className="cart-container d-flex justify-content-end" style={{width: '33%'}}>
+                <div style={{position: "absolute", right: "10px", top: "80px", display: showCart ? "block" : "none"}}>
+                    <CartComp cart={cart}/>
+                </div>
+                <div className="cart-container d-flex justify-content-end" style={{width: '33%'}}
+                     onClick={() => setShowCart(!showCart)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
                          className="bi bi-cart-fill" viewBox="0 0 16 16"
                          style={{cursor: "pointer", marginRight: "30px"}}>

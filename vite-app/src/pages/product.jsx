@@ -78,7 +78,7 @@ export default function ProductPage() {
                         productName={product?.name || "Okänd produkt"}
                     />
                     <h2>{product?.name}</h2>
-                    <h3>{product?.price?.$numberDecimal || laddar pris...} kr</h3>
+                    <h3>{product?.price?.$numberDecimal || "laddar pris..."} kr</h3>
                     <p>{product?.subTitle}</p>
                     <p>Artikel nummer: {product?._id}</p>
                     <div className="mb-4">
@@ -103,4 +103,4 @@ export default function ProductPage() {
             </div>
         </main>
     );
-
+}

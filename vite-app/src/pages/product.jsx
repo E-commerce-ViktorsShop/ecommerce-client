@@ -57,7 +57,7 @@ export default function ProductPage() {
   };
 
   return (
-    <main className="container mt-5">
+    <main className="container my-5 pb-1">
       <div className="row align-items-center">
         <div className="col-md-6">
           <EmblaCarousel images={product?.images} />
@@ -87,7 +87,7 @@ export default function ProductPage() {
           </button>
         </div>
       </div>
-      <div className="mt-5 px-4">
+      <div className="my-5 px-4">
         <h4>Produkt information</h4>
         <ProductTable productData={product?.data} />
       </div>

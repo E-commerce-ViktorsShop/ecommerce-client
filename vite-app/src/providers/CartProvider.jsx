@@ -39,7 +39,7 @@ export const CartProvider = ({children}) => {
             }
 
             // Add new item to cart if it doesn't already exist
-            return [...prevCart, {...item, quantity: 1}];
+            return [...prevCart, {...item, quantity: item.quantity}];
         });
     };
     //get total amount of items in cart

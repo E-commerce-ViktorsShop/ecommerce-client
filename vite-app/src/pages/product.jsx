@@ -134,7 +134,7 @@ export default function ProductPage() {
                     `https://ecommerce-api-sandy.vercel.app/products/${productId}`
                 );
                 console.log(response);
-                if (!response.ok) throw new Error(`Error: ${response.status} baaa`);
+                if (!response.ok) throw new Error(`Error: ${response.status}`);
                 const data = await response.json();
                 if (!data || data.length === 0 || data.message) {
                     navigate("/product/404")

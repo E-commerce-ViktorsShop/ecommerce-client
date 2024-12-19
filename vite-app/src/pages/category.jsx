@@ -13,11 +13,13 @@ export default function CategoryPage() {
 
 	useEffect(() => {
 		async function fetchData(category) {
+
 			let data = [];
+
 			const cacheKey = `${category}`;
 
 			const cachedData = localStorage.getItem(cacheKey);
-			console.log(cachedData)
+
 			if (cachedData) {
 				try {
 					data = JSON.parse(cachedData);
@@ -28,7 +30,7 @@ export default function CategoryPage() {
 				}
 			} else {
 				data = await fetchProductsByCategory(category);
-				console.log(data)
+
 				localStorage.setItem(cacheKey, JSON.stringify(data));
 			}
 			setProducts(data);
@@ -43,10 +45,8 @@ export default function CategoryPage() {
 	return (
 		<>
 			<main className='main' style={{background: '#f6f6f6'}}>
-				<h1
-					style={{
-						textAlign: 'center',
-					}}
+				<h1 className='text-center'
+
 				>
 					{category}
 				</h1>

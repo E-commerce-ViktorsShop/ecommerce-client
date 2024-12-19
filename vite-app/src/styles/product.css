@@ -7,23 +7,23 @@ main {
   margin-top: 6rem;
 }
 
-.custom-size {
-  width: auto;
-  height: 60%;
-}
-
 #add-to-cart-btn {
   background-color: var(--call-to-action);
   color: white;
-  border: 1px black solid;
   transition: all 200ms ease-in-out;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 3px 8px 0 rgba(0,0,0,0.19);
 }
 
 #add-to-cart-btn:active {
   transform: scale(0.95);
 }
 
-#quantity-box {
+#add-to-cart-btn:hover {
+  background-color: #b85901;
+  transition: 0.2s ease-in-out;
+}
+
+#quantity {
   width: 80px;
 }
 
@@ -120,6 +120,9 @@ main {
 .accordion-body tr {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #f6f6f6;
+  padding: 0.5rem;
 }
 
 .attribute-row td {

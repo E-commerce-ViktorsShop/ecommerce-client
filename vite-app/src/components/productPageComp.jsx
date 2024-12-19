@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Accordion from "react-bootstrap/Accordion";
 import LoadingSpinner from "../components/loaders/spinner.jsx";

@@ -2,11 +2,7 @@
 
 
 #Grupp medlemmar
-- @TmRAaEx
-- TmRAaEx Alexander Hirsch
-- @JonnaLuthman
-- JonnaLuthman
-- @viktorlinne
-- viktorlinne
-- @Denturion
-- Denturion David Funck
+- @TmRAaEx Alexander Hirsch
+- @JonnaLuthman Jonna Luthman
+- @viktorlinne viktorlinne
+- @Denturion David Funck

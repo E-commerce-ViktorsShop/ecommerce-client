@@ -8,5 +8,5 @@
 - JonnaLuthman
 - @viktorlinne
 - viktorlinne
--@Denturion
+- @Denturion
 - Denturion David Funck
